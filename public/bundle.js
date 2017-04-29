@@ -48,96 +48,12 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var GreeterMessage = React.createClass({
-	  displayName: 'GreeterMessage',
 
-	  render: function render() {
-	    var name = this.props.name;
-	    var message = this.props.message;
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Hello ',
-	        name
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        message
-	      )
-	    );
-	  }
-	});
-	var GreeterForm = React.createClass({
-	  displayName: 'GreeterForm',
-
-	  onFormSubmit: function onFormSubmit(e) {
-	    e.preventDefault();
-
-	    var updates = {};
-	    var name = this.refs.name.value;
-	    var message = this.refs.message.value;
-
-	    if (name.length > 0) {
-	      this.refs.name.value = '';
-	      updates.name = name;
-	    }
-	    if (message.length > 0) {
-	      this.refs.message.value = '';
-	      updates.message = message;
-	    }
-	    this.props.onNewData(updates);
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'form',
-	      { onSubmit: this.onFormSubmit },
-	      React.createElement('input', { type: 'text', ref: 'name' }),
-	      React.createElement('br', null),
-	      React.createElement('textarea', { ref: 'message', placeholder: 'enter message' }),
-	      React.createElement('br', null),
-	      React.createElement(
-	        'button',
-	        null,
-	        'Set name'
-	      )
-	    );
-	  }
-	});
-	var Greeter = React.createClass({
-	  displayName: 'Greeter',
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      name: "React",
-	      message: "This is the default message!"
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      name: this.props.name,
-	      message: this.props.message
-	    };
-	  },
-	  handleNewData: function handleNewData(updates) {
-	    this.setState(updates);
-	  },
-	  render: function render() {
-	    var name = this.state.name;
-	    var message = this.state.message;
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(GreeterMessage, { name: name, message: message }),
-	      React.createElement(GreeterForm, { onNewData: this.handleNewData })
-	    );
-	  }
-	});
-
-	ReactDOM.render(React.createElement(Greeter, { name: 'Geoff', message: 'Welcome to my greeter component!!' }), document.getElementById('app'));
+	ReactDOM.render(React.createElement(
+	  'h1',
+	  null,
+	  'Boilerplate'
+	), document.getElementById('app'));
 
 /***/ },
 /* 1 */
