@@ -25087,6 +25087,7 @@
 	      }
 	      if (icon === "50d" || icon === "50n") {
 	        iconClass = "wi wi-fog";
+	        imgSrc = '/img/mist.png';
 	      }
 	      if (isLoading) {
 	        return React.createElement(

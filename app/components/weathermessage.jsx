@@ -56,6 +56,7 @@ var WeatherMessage = React.createClass({
       }
       if ( icon === "50d" || icon === "50n" ) {
         iconClass = "wi wi-fog"
+        imgSrc = '/img/mist.png';
       }
       if (isLoading) {
         return <div><img src={imgSrc}/></div>
