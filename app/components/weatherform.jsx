@@ -13,7 +13,7 @@ var WeatherForm = React.createClass({
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <input type="text" ref="location" placeholder="type a city name..."/>
+          <input type="text" autoFocus ref="location" placeholder="type a city name..."/>
           <button><i className="fa fa-search"></i></button>
         </form>
       </div>

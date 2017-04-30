@@ -7,7 +7,8 @@ var Weather = React.createClass({
   getInitialState: function(){
     return {
       isLoading: false,
-      icon: ""
+      icon: "",
+      searchPrompt: true
     }
   },
   handleSearch: function(location){
@@ -19,6 +20,7 @@ var Weather = React.createClass({
         temp: data.main.temp,
         description: data.weather[0].description,
         icon: data.weather[0].icon,
+        searchPrompt: false,
         isLoading: false
       })
     },function(errorMessage){
@@ -27,18 +29,11 @@ var Weather = React.createClass({
     });
   },
   render: function() {
-    var {isLoading, temp, location, description, icon} = this.state;
-    function renderMessage() {
-      if(isLoading) {
-        return <div className="weather-loading">Fetching weather...</div>
-      }else{
-        return <WeatherMessage temp={temp} location={location} description={description} icon={icon}></WeatherMessage>
-      }
-    }
+    var {isLoading, temp, location, description, icon, searchPrompt} = this.state;
     return (
       <div className="weather-card">
         <div className="weather-message">
-          {renderMessage()}
+          <WeatherMessage temp={temp} location={location} description={description} icon={icon} isLoading={isLoading} searchPrompt={searchPrompt}></WeatherMessage>
         </div>
         <WeatherForm onSearch={this.handleSearch}></WeatherForm>
       </div>

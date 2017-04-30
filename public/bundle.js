@@ -24930,7 +24930,8 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      isLoading: false,
-	      icon: ""
+	      icon: "",
+	      searchPrompt: true
 	    };
 	  },
 	  handleSearch: function handleSearch(location) {
@@ -24942,6 +24943,7 @@
 	        temp: data.main.temp,
 	        description: data.weather[0].description,
 	        icon: data.weather[0].icon,
+	        searchPrompt: false,
 	        isLoading: false
 	      });
 	    }, function (errorMessage) {
@@ -24955,26 +24957,16 @@
 	        temp = _state.temp,
 	        location = _state.location,
 	        description = _state.description,
-	        icon = _state.icon;
+	        icon = _state.icon,
+	        searchPrompt = _state.searchPrompt;
 
-	    function renderMessage() {
-	      if (isLoading) {
-	        return React.createElement(
-	          'div',
-	          { className: 'weather-loading' },
-	          'Fetching weather...'
-	        );
-	      } else {
-	        return React.createElement(WeatherMessage, { temp: temp, location: location, description: description, icon: icon });
-	      }
-	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'weather-card' },
 	      React.createElement(
 	        'div',
 	        { className: 'weather-message' },
-	        renderMessage()
+	        React.createElement(WeatherMessage, { temp: temp, location: location, description: description, icon: icon, isLoading: isLoading, searchPrompt: searchPrompt })
 	      ),
 	      React.createElement(WeatherForm, { onSearch: this.handleSearch })
 	    );
@@ -25009,7 +25001,7 @@
 	      React.createElement(
 	        "form",
 	        { onSubmit: this.onFormSubmit },
-	        React.createElement("input", { type: "text", ref: "location", placeholder: "type a city name..." }),
+	        React.createElement("input", { type: "text", autoFocus: true, ref: "location", placeholder: "type a city name..." }),
 	        React.createElement(
 	          "button",
 	          null,
@@ -25026,76 +25018,146 @@
 /* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
+	var Loader = __webpack_require__(253);
 
 	var WeatherMessage = React.createClass({
-	  displayName: "WeatherMessage",
+	  displayName: 'WeatherMessage',
 
 	  render: function render() {
 	    var _props = this.props,
 	        temp = _props.temp,
 	        location = _props.location,
 	        description = _props.description,
-	        icon = _props.icon;
+	        icon = _props.icon,
+	        isLoading = _props.isLoading,
+	        searchPrompt = _props.searchPrompt;
 
-	    var ICON_PREFIX = "wi ";
-	    var WEATHER_CONDITIONS = [{
-	      icon: "04n",
-	      iconClass: "wi-night-cloudy",
-	      image: "public/img/night-cloudy.png"
-	    }, {
-	      icon: "01d",
-	      iconClass: "wi-day-sunny",
-	      image: "public/img/night-cloudy.png"
-	    }];
 	    function renderIcon() {
-	      var iconCode;
+	      var iconClass;
+	      var imgSrc;
 	      if (icon === "") {
-	        return React.createElement(
-	          "div",
-	          { className: "search-dialogue" },
-	          React.createElement("i", { className: "fa fa-search" }),
-	          "Search a city"
-	        );
-	      } else if (icon === "04n") {
-	        iconCode = "wi-night-cloudy";
-	      } else if (icon === "01d") {
-	        iconCode = "wi-day-sunny";
-	      } else if (icon === "10n") {
-	        iconCode = "wi-night-alt-rain";
+	        iconClass = "fa fa-search";
+	        imgSrc = "/img/search.png";
 	      }
-	      var iconName = "" + ICON_PREFIX + iconCode;
-	      return React.createElement("i", { className: iconName });
-	    }
-	    function renderTemp() {
-	      if (description && temp) {
+	      if (icon === "01d") {
+	        iconClass = "wi wi-day-sunny";
+	        imgSrc = '/img/sunny.png';
+	      }
+	      if (icon === "01n") {
+	        iconClass = "wi wi-night-clear";
+	        imgSrc = '/img/sunny.png';
+	      }
+	      if (icon === "02d") {
+	        iconClass = "wi wi-day-cloudy";
+	        imgSrc = '/img/scattered-cloud.png';
+	      }
+	      if (icon === "02n") {
+	        iconClass = "wi wi-night-alt-cloudy";
+	        imgSrc = '/img/scattered-cloud.png';
+	      }
+	      if (icon === "03d" || icon === "03n") {
+	        iconClass = "wi wi-cloud";
+	        imgSrc = '/img/scattered-cloud.png';
+	      }
+	      if (icon === "04d" || icon === "04n") {
+	        iconClass = "wi wi-cloudy";
+	        imgSrc = 'img/broken-clouds.png';
+	      }
+	      if (icon === "09d" || icon === "09n") {
+	        iconClass = "wi wi-rain-mix";
+	        imgSrc = "/img/rain.png";
+	      }
+	      if (icon === "10d") {
+	        iconClass = "wi wi-day-rain-mix";
+	        imgSrc = "/img/rain.png";
+	      }
+	      if (icon === "10n") {
+	        iconClass = "wi-night-rain-mix";
+	        imgSrc = "/img/rain.png";
+	      }
+	      if (icon === "11d" || icon === "11n") {
+	        iconClass = "wi wi-storm-showers";
+	      }
+	      if (icon === "13d" || icon === "13n") {
+	        iconClass = "wi wi-snow";
+	        imgSrc = "/img/light-snow.png";
+	      }
+	      if (icon === "50d" || icon === "50n") {
+	        iconClass = "wi wi-fog";
+	      }
+	      if (isLoading) {
 	        return React.createElement(
-	          "h2",
-	          { className: "weather-temp" },
+	          'div',
+	          null,
+	          React.createElement('img', { src: imgSrc })
+	        );
+	      } else if (!isLoading) {
+	        return React.createElement(
+	          'div',
+	          null,
+	          React.createElement('i', { className: iconClass }),
+	          ' ',
+	          React.createElement('img', { src: imgSrc })
+	        );
+	      }
+	    }
+
+	    function renderSearchtext() {
+	      if (searchPrompt && !isLoading) {
+	        return React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'div',
+	            { className: 'search-dialogue' },
+	            React.createElement('i', { className: 'fa fa-search' }),
+	            'Search for weather in any city'
+	          )
+	        );
+	      }
+	    }
+
+	    function renderTemp() {
+	      if (description && temp && !isLoading) {
+	        return React.createElement(
+	          'h2',
+	          { className: 'weather-temp' },
 	          temp,
-	          " ",
+	          ' ',
 	          String.fromCharCode(176),
-	          " Celsius",
-	          React.createElement("br", null),
-	          "Cloud cover  ",
-	          String.fromCharCode(8212),
-	          " ",
+	          ' C',
+	          React.createElement('br', null),
 	          description
 	        );
 	      }
 	    }
+
+	    function renderLoader() {
+	      if (isLoading) {
+	        return React.createElement(Loader, null);
+	      }
+	    }
+
+	    function renderLocation() {
+	      if (!isLoading) {
+	        return React.createElement(
+	          'h1',
+	          { className: 'weather-location' },
+	          location
+	        );
+	      }
+	    }
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
-	      React.createElement(
-	        "h1",
-	        { className: "weather-location" },
-	        location
-	      ),
+	      renderLoader(),
+	      renderLocation(),
 	      renderTemp(),
-	      renderIcon()
+	      renderIcon(),
+	      renderSearchtext()
 	    );
 	  }
 	});
@@ -28698,6 +28760,32 @@
 	});
 
 	module.exports = Examples;
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Loader = React.createClass({
+	  displayName: "Loader",
+
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      { className: "spinner" },
+	      React.createElement("div", { className: "rect1" }),
+	      React.createElement("div", { className: "rect2" }),
+	      React.createElement("div", { className: "rect3" }),
+	      React.createElement("div", { className: "rect4" }),
+	      React.createElement("div", { className: "rect5" })
+	    );
+	  }
+	});
+
+	module.exports = Loader;
 
 /***/ })
 /******/ ]);
