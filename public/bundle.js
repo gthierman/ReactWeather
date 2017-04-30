@@ -24867,11 +24867,6 @@
 	      'div',
 	      null,
 	      React.createElement(Nav, null),
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Hi'
-	      ),
 	      this.props.children
 	    );
 	  }
@@ -24896,21 +24891,21 @@
 
 	  render: function render() {
 	    return React.createElement(
-	      'div',
+	      'nav',
 	      null,
 	      React.createElement(
 	        IndexLink,
-	        { to: '/', activeClassName: 'active', activeStyle: { fontWeight: "bold" } },
+	        { to: '/', activeClassName: 'active' },
 	        'Weather'
 	      ),
 	      React.createElement(
 	        Link,
-	        { to: '/about', activeClassName: 'active', activeStyle: { fontWeight: "bold" } },
+	        { to: '/about', activeClassName: 'active' },
 	        'About'
 	      ),
 	      React.createElement(
 	        Link,
-	        { to: '/examples', activeClassName: 'active', activeStyle: { fontWeight: "bold" } },
+	        { to: '/examples', activeClassName: 'active' },
 	        'Examples'
 	      )
 	    );
@@ -24940,6 +24935,7 @@
 	  },
 	  handleSearch: function handleSearch(location) {
 	    var that = this;
+	    debugger;
 	    this.setState({ isLoading: true });
 	    openWeatherMap.getTemp(location).then(function (temp) {
 	      that.setState({
@@ -24961,8 +24957,8 @@
 	    function renderMessage() {
 	      if (isLoading) {
 	        return React.createElement(
-	          'h3',
-	          null,
+	          'div',
+	          { className: 'weather-loading' },
 	          'Fetching weather...'
 	        );
 	      } else if (temp && location) {
@@ -24971,8 +24967,12 @@
 	    }
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Weather',
+	      { className: 'weather-card' },
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Get the Weather'
+	      ),
 	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
 	      renderMessage()
 	    );
@@ -25007,7 +25007,8 @@
 	      React.createElement(
 	        "form",
 	        { onSubmit: this.onFormSubmit },
-	        React.createElement("input", { type: "text", ref: "location" }),
+	        React.createElement("input", { type: "text", ref: "location", placeholder: "type a city name..." }),
+	        React.createElement("br", null),
 	        React.createElement(
 	          "button",
 	          null,
@@ -25024,12 +25025,12 @@
 /* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var WeatherMessage = React.createClass({
-	  displayName: 'WeatherMessage',
+	  displayName: "WeatherMessage",
 
 	  render: function render() {
 	    var _props = this.props,
@@ -25037,12 +25038,17 @@
 	        location = _props.location;
 
 	    return React.createElement(
-	      'div',
-	      null,
-	      'The weather in ',
-	      location,
-	      ' is ',
-	      temp
+	      "div",
+	      { className: "weather-message" },
+	      React.createElement(
+	        "h3",
+	        null,
+	        location
+	      ),
+	      temp,
+	      " ",
+	      String.fromCharCode(176),
+	      " Celsius"
 	    );
 	  }
 	});
