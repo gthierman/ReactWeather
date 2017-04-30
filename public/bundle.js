@@ -24929,7 +24929,8 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      isLoading: false
+	      isLoading: false,
+	      icon: ""
 	    };
 	  },
 	  handleSearch: function handleSearch(location) {
@@ -24963,7 +24964,7 @@
 	          { className: 'weather-loading' },
 	          'Fetching weather...'
 	        );
-	      } else if (temp && location) {
+	      } else {
 	        return React.createElement(WeatherMessage, { temp: temp, location: location, description: description, icon: icon });
 	      }
 	    }
@@ -25012,7 +25013,7 @@
 	        React.createElement(
 	          "button",
 	          null,
-	          "Get weather"
+	          React.createElement("i", { className: "fa fa-search" })
 	        )
 	      )
 	    );
@@ -25040,17 +25041,50 @@
 	        icon = _props.icon;
 
 	    var ICON_PREFIX = "wi ";
+	    var WEATHER_CONDITIONS = [{
+	      icon: "04n",
+	      iconClass: "wi-night-cloudy",
+	      image: "public/img/night-cloudy.png"
+	    }, {
+	      icon: "01d",
+	      iconClass: "wi-day-sunny",
+	      image: "public/img/night-cloudy.png"
+	    }];
 	    function renderIcon() {
 	      var iconCode;
-	      if (icon === "04n") {
+	      if (icon === "") {
+	        return React.createElement(
+	          "div",
+	          { className: "search-dialogue" },
+	          React.createElement("i", { className: "fa fa-search" }),
+	          "Search a city"
+	        );
+	      } else if (icon === "04n") {
 	        iconCode = "wi-night-cloudy";
 	      } else if (icon === "01d") {
 	        iconCode = "wi-day-sunny";
 	      } else if (icon === "10n") {
 	        iconCode = "wi-night-alt-rain";
 	      }
-	      var iconName = ICON_PREFIX + " " + iconCode;
+	      var iconName = "" + ICON_PREFIX + iconCode;
 	      return React.createElement("i", { className: iconName });
+	    }
+	    function renderTemp() {
+	      if (description && temp) {
+	        return React.createElement(
+	          "h2",
+	          { className: "weather-temp" },
+	          temp,
+	          " ",
+	          String.fromCharCode(176),
+	          " Celsius",
+	          React.createElement("br", null),
+	          "Cloud cover  ",
+	          String.fromCharCode(8212),
+	          " ",
+	          description
+	        );
+	      }
 	    }
 	    return React.createElement(
 	      "div",
@@ -25060,19 +25094,7 @@
 	        { className: "weather-location" },
 	        location
 	      ),
-	      React.createElement(
-	        "h2",
-	        { className: "weather-temp" },
-	        temp,
-	        " ",
-	        String.fromCharCode(176),
-	        " Celsius",
-	        React.createElement("br", null),
-	        "Cloud cover  ",
-	        String.fromCharCode(8212),
-	        " ",
-	        description
-	      ),
+	      renderTemp(),
 	      renderIcon()
 	    );
 	  }
