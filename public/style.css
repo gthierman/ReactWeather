@@ -10,21 +10,34 @@ body {
 }
 .weather-card {
   width: 500px;
-  height:400px;
-  background: #fff;
-  border: 1px solid #D7DEE2;
-  text-align: center;
-  padding: 32px;
   margin: 0 auto;
+  border-radius: 6px;
+  background: #FFFFFF;
+  box-shadow: 0 0 20px 0 rgba(38,50,56,0.20);
+  margin-top: 60px;
 }
 .weather-message,
 .weather-loading {
   margin-top: 32px;
   font-weight: bold;
 }
+.weather-message {
+  height: 306px;
+  margin-top: 0;
+  margin-bottom: 32px;
+  border-radius: 2px;
+  background: #F5F7F8;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 form {
-  width: 300px;
+  /*width: 300px;*/
   margin: 0 auto;
+  display: flex;
+  padding: 0 32px 32px;
 }
 input, button {
   width: 100%;
@@ -36,6 +49,16 @@ input {
   border-radius: 2px;
   height: 32px;
   padding: 0 12px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+input:focus, button:focus {
+  outline: 0;
+  border-color: #0075bb;
+}
+button:focus {
+  border-color: #004670;
 }
 
 nav {
@@ -45,6 +68,7 @@ nav {
   background: #fff;
   margin-bottom: 60px;
   padding: 0 60px;
+  /*box-shadow: 0 2px 8px 0 rgba(38,50,56,0.20);*/
 }
 nav a {
   line-height: 60px;
@@ -53,7 +77,6 @@ nav a {
   color: #B0BEC5  ;
 }
 nav .active {
-  /*background: #0075bb;*/
   color: #263238;
   border-bottom: 5px solid #0075bb;
 }
@@ -66,10 +89,34 @@ button {
   background: #0075bb;
   color: #fff;
   border: none;
-  margin-top:20px;
   cursor: pointer;
   border-radius: 2px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border: 1px solid transparent;
+  width: 120px;
 }
 button:hover {
   background-color: #004670;
+}
+
+h1,h2,h3,h4 {
+  margin: 0;
+  padding: 0;
+}
+.weather-location {
+  font-size: 32px;
+  margin-bottom: 20px;
+  line-height: 20px;
+  text-transform: capitalize;
+}
+.weather-temp {
+  font-size:13px;
+  margin-bottom: 12px;
+  line-height: 18px;
+  color: #667881;
+  font-weight: normal;
+}
+.wi {
+  font-size: 60px;
 }

@@ -24866,7 +24866,6 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(Nav, null),
 	      this.props.children
 	    );
 	  }
@@ -24935,12 +24934,13 @@
 	  },
 	  handleSearch: function handleSearch(location) {
 	    var that = this;
-	    debugger;
 	    this.setState({ isLoading: true });
-	    openWeatherMap.getTemp(location).then(function (temp) {
+	    openWeatherMap.getData(location).then(function (data) {
 	      that.setState({
 	        location: location,
-	        temp: temp,
+	        temp: data.main.temp,
+	        description: data.weather[0].description,
+	        icon: data.weather[0].icon,
 	        isLoading: false
 	      });
 	    }, function (errorMessage) {
@@ -24952,7 +24952,9 @@
 	    var _state = this.state,
 	        isLoading = _state.isLoading,
 	        temp = _state.temp,
-	        location = _state.location;
+	        location = _state.location,
+	        description = _state.description,
+	        icon = _state.icon;
 
 	    function renderMessage() {
 	      if (isLoading) {
@@ -24962,19 +24964,18 @@
 	          'Fetching weather...'
 	        );
 	      } else if (temp && location) {
-	        return React.createElement(WeatherMessage, { temp: temp, location: location });
+	        return React.createElement(WeatherMessage, { temp: temp, location: location, description: description, icon: icon });
 	      }
 	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'weather-card' },
 	      React.createElement(
-	        'h2',
-	        null,
-	        'Get the Weather'
+	        'div',
+	        { className: 'weather-message' },
+	        renderMessage()
 	      ),
-	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
-	      renderMessage()
+	      React.createElement(WeatherForm, { onSearch: this.handleSearch })
 	    );
 	  }
 	});
@@ -25008,7 +25009,6 @@
 	        "form",
 	        { onSubmit: this.onFormSubmit },
 	        React.createElement("input", { type: "text", ref: "location", placeholder: "type a city name..." }),
-	        React.createElement("br", null),
 	        React.createElement(
 	          "button",
 	          null,
@@ -25035,20 +25035,45 @@
 	  render: function render() {
 	    var _props = this.props,
 	        temp = _props.temp,
-	        location = _props.location;
+	        location = _props.location,
+	        description = _props.description,
+	        icon = _props.icon;
 
+	    var ICON_PREFIX = "wi ";
+	    function renderIcon() {
+	      var iconCode;
+	      if (icon === "04n") {
+	        iconCode = "wi-night-cloudy";
+	      } else if (icon === "01d") {
+	        iconCode = "wi-day-sunny";
+	      } else if (icon === "10n") {
+	        iconCode = "wi-night-alt-rain";
+	      }
+	      var iconName = ICON_PREFIX + " " + iconCode;
+	      return React.createElement("i", { className: iconName });
+	    }
 	    return React.createElement(
 	      "div",
-	      { className: "weather-message" },
+	      null,
 	      React.createElement(
-	        "h3",
-	        null,
+	        "h1",
+	        { className: "weather-location" },
 	        location
 	      ),
-	      temp,
-	      " ",
-	      String.fromCharCode(176),
-	      " Celsius"
+	      React.createElement(
+	        "h2",
+	        { className: "weather-temp" },
+	        temp,
+	        " ",
+	        String.fromCharCode(176),
+	        " Celsius",
+	        React.createElement("br", null),
+	        "Cloud cover  ",
+	        String.fromCharCode(8212),
+	        " ",
+	        description
+	      ),
+	      renderIcon()
 	    );
 	  }
 	});
@@ -25068,7 +25093,7 @@
 	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?q=';
 
 	module.exports = {
-	  getTemp: function getTemp(location) {
+	  getData: function getData(location) {
 	    var encodedLocation = encodeURIComponent(location);
 	    var requestURL = '' + OPEN_WEATHER_MAP_URL + encodedLocation + API_KEY;
 	    console.log(requestURL);
@@ -25076,7 +25101,8 @@
 	      if (res.data.cod & res.data.message) {
 	        throw new Error(res.data.message);
 	      } else {
-	        return res.data.main.temp;
+	        console.log(res.data);
+	        return res.data;
 	      }
 	    }, function (res) {
 	      throw new Error(res.data.message);
