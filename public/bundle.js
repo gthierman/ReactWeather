@@ -28834,14 +28834,14 @@
 	var content = __webpack_require__(259);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(261)(content, {});
+	var update = __webpack_require__(260)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!./style.css");
+			module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/index.js!./style.scss", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/index.js!./style.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -28854,74 +28854,18 @@
 /* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(260)();
+	exports = module.exports = __webpack_require__(261)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box;\n}\nhtml {\n  height:100%;\n  height: 100%;\n  display: flex;\n  align-self: center;\n  justify-content: center;\n  align-items: stretch;\n}\nbody {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  background: #F5F7F8;\n  margin: 0;\n  padding: 0;\n  color: #263238;\n  align-self:center;\n}\n.weather-card {\n  width: 500px;\n  border-radius: 6px;\n  background: #FFFFFF;\n  box-shadow: 0 0 50px 0 rgba(38,50,56,0.20);\n}\n.weather-message,\n.weather-loading {\n  margin-top: 32px;\n  font-weight: bold;\n}\n.weather-loading {\n  color: #263238;\n}\n.weather-message {\n  height: 306px;\n  margin-top: 0;\n  margin-bottom: 32px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  background: #F5F7F8;\n  /*background-image: linear-gradient(-180deg, #FFFFFF 0%, #F5F7F8 100%);*/\n  position: relative;\n  color: #fff;\n}\nform {\n  /*width: 300px;*/\n  margin: 0 auto;\n  display: flex;\n  padding: 0 32px 32px;\n}\ninput, button {\n  width: 100%;\n}\ninput {\n  background: #FFFFFF;\n  border: 1px solid #D7DEE2;\n  box-shadow: inset 0 2px 2px 0 rgba(38,50,56,0.10);\n  border-radius: 20px;\n  font-size: 14px;\n  font-family: \"Helvetica Neue\";\n  height: 40px;\n  padding: 0 12px;\n}\ninput:focus {\n  outline: 0;\n  background: #FFFFFF;\n  border: 1px solid #1E9EFC;\n  box-shadow: 0 0 0 1px #1E9EFC;\n}\n\nnav {\n  display: flex;\n  height: 60px;\n  align-items: stretch;\n  background: #fff;\n  margin-bottom: 60px;\n  padding: 0 60px;\n  /*box-shadow: 0 2px 8px 0 rgba(38,50,56,0.20);*/\n}\nnav a {\n  line-height: 60px;\n  padding: 0 20px;\n  text-decoration: none;\n  color: #B0BEC5  ;\n}\nnav .active {\n  color: #263238;\n  border-bottom: 5px solid #0075bb;\n}\nnav a:hover {\n  background: #0075bb;\n  color: #fff;\n}\nbutton {\n  height: 40px;\n  color: #fff;\n  border: none;\n  cursor: pointer;\n  border-radius: 2px;\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n  /*border: 1px solid transparent;*/\n  width: 45px;\n  margin-left: 20px;\n  font-size: 16px;\n  border-radius: 20px;\n  background-image: linear-gradient(-180deg, #4AB2FE 0%, #1E9EFC 100%);\n  }\nbutton:hover {\n  /*background-color: #004670;*/\n}\nbutton:focus {\n  border-color: transparent;\n  background-image: linear-gradient(-180deg, #4AB2FE 0%, #1E9EFC 100%);\n  box-shadow: 0 1px 0 0 rgba(38,50,56,0.10);\n  outline: 0;\n  /* Rectangle 4: */\n  border: 2px solid #004670;\n  box-shadow: 0 1px 0 0 rgba(38,50,56,0.10);\n}\nbutton:active {\n  background: #1E9EFC;\n  box-shadow: inset 0 1px 5px 0 rgba(0,70,112,0.20);\n}\n\nh1,h2,h3,h4 {\n  margin: 0;\n  padding: 0;\n}\n.weather-location {\n  font-size: 32px;\n  margin-bottom: 20px;\n  line-height: 20px;\n  text-transform: capitalize;\n  z-index: 1;\n  position: relative;\n  color: inherit;\n}\n.weather-temp {\n  font-size:13px;\n  margin-bottom: 20px;\n  line-height: 18px;\n  color: inherit;\n  /*color: #667881;*/\n  font-weight: normal;\n  z-index: 1;\n  position: relative;\n  text-transform: capitalize;\n}\n.wi {\n  font-size: 40px;\n  z-index: 1;\n  position: relative;\n  color: inherit;\n}\n.button .fa {\n  font-size: 14px;\n}\n\n.fa {\n  font-size:\n}\n.search-dialogue {\n  font-size: 18px;\n  padding: 32px;\n  border-radius: 100px;\n  z-index: 1;\n  position: relative;\n  opacity: 0.6;\n  color: #FFFFFF;\n  letter-spacing: 0;\n  font-weight: normal;\n}\n.search-dialogue .fa {\n  margin-right: 12px;\n}\nimg {\n  width: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  z-index: 0;\n}\n.spinner {\n  margin: 100px auto;\n  width: 50px;\n  height: 40px;\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  z-index: 1;\n}\n\n.spinner > div {\n  background-color: #263238;\n  opacity: 0.3;\n  height: 100%;\n  width: 6px;\n  border-radius: 3px;\n  display: inline-block;\n  margin: 0 3px 0 0;\n\n  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay 1.2s infinite ease-in-out;\n}\n\n.spinner .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n\n.spinner .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n.spinner .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n\n.spinner .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n\n@-webkit-keyframes sk-stretchdelay {\n  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }\n  20% { -webkit-transform: scaleY(1.0) }\n}\n\n@keyframes sk-stretchdelay {\n  0%, 40%, 100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.5);\n  }  20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n  }\n}\n", ""]);
+	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nhtml {\n  height: 100%;\n  height: 100%;\n  display: flex;\n  align-self: center;\n  justify-content: center;\n  align-items: stretch; }\n\nbody {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  background: #F5F7F8;\n  margin: 0;\n  padding: 0;\n  color: #263238;\n  color: blue;\n  align-self: center; }\n\n.weather-card {\n  width: 500px;\n  border-radius: 6px;\n  background: #FFFFFF;\n  box-shadow: 0 0 50px 0 rgba(38, 50, 56, 0.2); }\n\n.weather-message,\n.weather-loading {\n  margin-top: 32px;\n  font-weight: bold; }\n\n.weather-loading {\n  color: #263238; }\n\n.weather-message {\n  height: 306px;\n  margin-top: 0;\n  margin-bottom: 32px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  background: #F5F7F8;\n  /*background-image: linear-gradient(-180deg, #FFFFFF 0%, #F5F7F8 100%);*/\n  position: relative;\n  color: #fff; }\n\nform {\n  /*width: 300px;*/\n  margin: 0 auto;\n  display: flex;\n  padding: 0 32px 32px; }\n\ninput, button {\n  width: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #D7DEE2;\n  box-shadow: inset 0 2px 2px 0 rgba(38, 50, 56, 0.1);\n  border-radius: 20px;\n  font-size: 14px;\n  font-family: \"Helvetica Neue\";\n  height: 40px;\n  padding: 0 12px; }\n\ninput:focus {\n  outline: 0;\n  background: #FFFFFF;\n  border: 1px solid #1E9EFC;\n  box-shadow: 0 0 0 1px #1E9EFC; }\n\nnav {\n  display: flex;\n  height: 60px;\n  align-items: stretch;\n  background: #fff;\n  margin-bottom: 60px;\n  padding: 0 60px;\n  /*box-shadow: 0 2px 8px 0 rgba(38,50,56,0.20);*/ }\n\nnav a {\n  line-height: 60px;\n  padding: 0 20px;\n  text-decoration: none;\n  color: #B0BEC5; }\n\nnav .active {\n  color: #263238;\n  border-bottom: 5px solid #0075bb; }\n\nnav a:hover {\n  background: #0075bb;\n  color: #fff; }\n\nbutton {\n  height: 40px;\n  color: #fff;\n  border: none;\n  cursor: pointer;\n  border-radius: 2px;\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0;\n  /*border: 1px solid transparent;*/\n  width: 45px;\n  margin-left: 20px;\n  font-size: 16px;\n  border-radius: 20px;\n  background-image: linear-gradient(-180deg, #4AB2FE 0%, #1E9EFC 100%); }\n\nbutton:hover {\n  /*background-color: #004670;*/ }\n\nbutton:focus {\n  border-color: transparent;\n  background-image: linear-gradient(-180deg, #4AB2FE 0%, #1E9EFC 100%);\n  box-shadow: 0 1px 0 0 rgba(38, 50, 56, 0.1);\n  outline: 0;\n  /* Rectangle 4: */\n  border: 2px solid #004670;\n  box-shadow: 0 1px 0 0 rgba(38, 50, 56, 0.1); }\n\nbutton:active {\n  background: #1E9EFC;\n  box-shadow: inset 0 1px 5px 0 rgba(0, 70, 112, 0.2); }\n\nh1, h2, h3, h4 {\n  margin: 0;\n  padding: 0; }\n\n.weather-location {\n  font-size: 32px;\n  margin-bottom: 20px;\n  line-height: 20px;\n  text-transform: capitalize;\n  z-index: 1;\n  position: relative;\n  color: inherit; }\n\n.weather-temp {\n  font-size: 13px;\n  margin-bottom: 20px;\n  line-height: 18px;\n  color: inherit;\n  /*color: #667881;*/\n  font-weight: normal;\n  z-index: 1;\n  position: relative;\n  text-transform: capitalize; }\n\n.wi {\n  font-size: 40px;\n  z-index: 1;\n  position: relative;\n  color: inherit; }\n\n.button .fa {\n  font-size: 14px; }\n\n.search-dialogue {\n  font-size: 18px;\n  padding: 32px;\n  border-radius: 100px;\n  z-index: 1;\n  position: relative;\n  opacity: 0.6;\n  color: #FFFFFF;\n  letter-spacing: 0;\n  font-weight: normal; }\n\n.search-dialogue .fa {\n  margin-right: 12px; }\n\nimg {\n  width: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  z-index: 0; }\n\n.spinner {\n  margin: 100px auto;\n  width: 50px;\n  height: 40px;\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  z-index: 1; }\n\n.spinner > div {\n  background-color: #263238;\n  opacity: 0.3;\n  height: 100%;\n  width: 6px;\n  border-radius: 3px;\n  display: inline-block;\n  margin: 0 3px 0 0;\n  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay 1.2s infinite ease-in-out; }\n\n.spinner .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s; }\n\n.spinner .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s; }\n\n.spinner .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s; }\n\n.spinner .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s; }\n\n@-webkit-keyframes sk-stretchdelay {\n  0%, 40%, 100% {\n    -webkit-transform: scaleY(0.4); }\n  20% {\n    -webkit-transform: scaleY(1); } }\n\n@keyframes sk-stretchdelay {\n  0%, 40%, 100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.5); }\n  20% {\n    transform: scaleY(1);\n    -webkit-transform: scaleY(1); } }\n", ""]);
 
 	// exports
 
 
 /***/ }),
 /* 260 */
-/***/ (function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ }),
-/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -29172,6 +29116,62 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
 
 
 /***/ })

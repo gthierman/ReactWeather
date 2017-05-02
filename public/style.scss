@@ -1,3 +1,4 @@
+$blue: blue;
 * {
   box-sizing: border-box;
 }
@@ -15,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   color: #263238;
+  color: $blue;
   align-self:center;
 }
 .weather-card {
@@ -159,9 +161,6 @@ h1,h2,h3,h4 {
   font-size: 14px;
 }
 
-.fa {
-  font-size:
-}
 .search-dialogue {
   font-size: 18px;
   padding: 32px;

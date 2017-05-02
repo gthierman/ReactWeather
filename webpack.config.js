@@ -30,7 +30,7 @@ module.exports = {
       openWeatherMap: 'app/api/openweathermap',
       Loader: 'app/components/loader',
       Icon: 'app/components/Icon',
-      Styles: 'app/public/style.css'
+      Styles: 'public/style.scss'
       // appStyles: 'app/public/style.scss',
     },
     extensions: ['', '.js', '.jsx']

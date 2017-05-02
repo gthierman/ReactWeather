@@ -5,7 +5,7 @@ var Main = require('Main');
 var Weather = require('Weather');
 var About = require('About');
 var Examples = require('Examples');
-require('style!css!public/style.css');
+require('style!css!sass!Styles');
 
 ReactDOM.render(
   <Router history={hashHistory}>
